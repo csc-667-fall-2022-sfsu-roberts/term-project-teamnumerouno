@@ -12,4 +12,22 @@ router.get("/", (request, response) => {
     });
 });
 
+router.get("/cards", (request, response) => {
+    db.any(`SELECT * FROM cards`)
+    .then( results => response.json(results))
+    .catch( error => {
+        console.log(error);
+        response.json({error})
+    });
+});
+
+router.get("/users", (request, response) => {
+    db.any(`SELECT id, email FROM users`)
+    .then( results => response.json(results))
+    .catch( error => {
+        console.log(error);
+        response.json({error})
+    });
+});
+
 module.exports = router;
