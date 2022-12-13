@@ -43,6 +43,7 @@ module.exports = {
         ),
         defaultValue: "deck"
       },
+      // deck, played, hand
       position: {
         type: Sequelize.INTEGER
       }

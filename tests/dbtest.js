@@ -30,4 +30,23 @@ router.get("/users", (request, response) => {
     });
 });
 
+router.get("/deckCards/:gameId", (request, response) => {
+    let gameId = request.params.gameId;
+    db.any(`SELECT * FROM game_cards WHERE game_id = ${gameId} AND status = 'deck'`)
+    .then(results => response.json(results))
+    .catch(error => {
+        response.json({error});
+    });
+});
+
+router.get("/userHand/:userId/:gameId", (request, response) => {
+    let userId = request.params.userId;
+    let gameId = request.params.gameId;
+    db.any(`SELECT * FROM game_cards WHERE game_id = ${gameId} AND user_id = ${userId}`)
+    .then(results => response.json(results))
+    .catch(error => {
+        response.json({error});
+    });
+})
+
 module.exports = router;
