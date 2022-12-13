@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// const sessionInstance = require() 
+// const protect = require();
 
 // To use .env
 if(process.env.NODE_ENV === 'development') {
@@ -12,6 +14,7 @@ if(process.env.NODE_ENV === 'development') {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testsRouter = require('./tests/dbtest');
+var gamesRouter = require('./routes/games');
 
 var app = express();
 
@@ -28,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
+app.use('/games', gamesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
