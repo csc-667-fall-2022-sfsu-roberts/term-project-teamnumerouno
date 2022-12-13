@@ -1,0 +1,38 @@
+extends layout
+block content 
+    h1 Lobby 
+    if username 
+        h2 Welcome back #{username} (#{userId})
+
+    #listOfGames 
+        h3 Available Games 
+        ul 
+            each game in games.joinable
+            li 
+                span = game.title
+                form(action=`/games/${game.id}/join` method="post" target="blank")
+                    buttom Join Game 
+        h3 Active Games 
+        ul 
+            each game in games.active 
+            li 
+                a(href=`/games/${game.id}` target="blank") = game.title 
+    
+    form(action="/games/create" method="post")
+        label(for="GameTitle") Game Title: 
+        input#title(type="text" name="title")
+        button#createGame Create Game 
+    
+    template#message 
+        span.messenger
+        span.chat 
+        span.time
+        
+    #chat  
+        #messages 
+        #send 
+            input(type="text" id="messageField")
+    
+    block footer   
+        script(src="/jsfiles/chat.js")
+        script(src="/jsfiles/gameManager.js")
